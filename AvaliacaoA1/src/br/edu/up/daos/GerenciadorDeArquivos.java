@@ -19,10 +19,8 @@ public class GerenciadorDeArquivos {
 
         try (Scanner leitorAluno = new Scanner(new File(arquivoAluno))){
 
-            headerAluno = leitorAluno.nextLine();
-            System.out.println("1");
             while (leitorAluno.hasNextLine()) {
-                System.out.println("2");
+
                 String linha = leitorAluno.nextLine();
                 String[] dados = linha.split(";");
 
@@ -49,11 +47,11 @@ public class GerenciadorDeArquivos {
     }
 
     public String gerarArquivoCSV(List<Aluno> listaAlunos) {
-        int qtdAlunos = listaAlunos.size();
+        int qtdAlunos = 0;
         int qtdAprovados6 = 0;
         int qtdReprovados = 0;
-        double menorNota = 10;
-        double maiorNota = 0;
+        double menorNota = Double.MAX_VALUE; 
+        double maiorNota = Double.MIN_VALUE; 
         double mediaGeral = 0;
         double somaNotas = 0;
         String csvFile = "C:\\Users\\autologon\\Documents\\A1-33824215\\AvaliacaoA1\\src\\br\\edu\\up\\resumo.csv";
@@ -68,6 +66,7 @@ public class GerenciadorDeArquivos {
 
             for (Aluno aluno : listaAlunos) {
                 double nota = aluno.getNota();
+                qtdAlunos++;
                 if (nota >= 6) {
                     qtdAprovados6++;
                 } else {
